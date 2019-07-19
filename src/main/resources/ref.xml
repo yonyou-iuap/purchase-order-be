@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+
+
+    <RefViewModelVO code="order_type" name="请购单类型" i18nkey="" type="2" path="common-ref">
+        <thead>
+            <field code="code" i18nkey="">编码</field>
+            <field code="name" i18nkey="">名称</field>
+        </thead>
+        <table name="order_type">
+            <field code="id">ID</field>
+            <field code="refpk">ID</field>
+            <field code="refcode">code</field>
+            <field code="refname">name</field>
+            <!-- extension扩展显示 -->
+            <field code="extension">code</field>
+            <field code="extension">name</field>
+        </table>
+    </RefViewModelVO>
+
+</root>

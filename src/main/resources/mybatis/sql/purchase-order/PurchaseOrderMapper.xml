@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+    <mapper namespace="com.yonyou.iuap.pap.dao.PurchaseOrderMapper">
+
+<resultMap id="BaseResultMap" type="com.yonyou.iuap.pap.entity.PurchaseOrder">
+<id column="id" jdbcType="VARCHAR" property="id" />
+            <result column="order_name"  property="orderName" />
+            <result column="order_code"  property="orderCode" />
+            <result column="order_price"  property="orderPrice" />
+            <result column="order_date"  property="orderDate" />
+            <result column="order_dept"  property="orderDept" />
+            <result column="order_type"  property="orderType" />
+        <result column="dr" property="dr" />
+    <result column="ts" property="ts" />
+    <result column="last_modified" property="lastModified" />
+    <result column="last_modify_user" property="lastModifyUser" />
+    <result column="create_time" property="createTime" />
+    <result column="create_user" property="createUser" />
+
+    <result column="bpm_state" property="bpmState" />
+    
+
+    </resultMap>
+
+
+    <select id="selectAllByPage"  resultMap="BaseResultMap">
+SELECT  t.* FROM PURCHASE_ORDER t WHERE 1 =1 and t.dr=0
+
+    <if test="condition != null">
+    <if test="condition.searchMap.id!=null and condition.searchMap.id!='' ">
+and t.ID = #{condition.searchMap.id}
+    </if>
+
+            <if test="condition.searchMap.orderName!=null and condition.searchMap.orderName!='' ">
+                and t.order_name LIKE CONCAT( CONCAT('%', #{condition.searchMap.orderName}),'%')
+
+
+
+        </if>
+
+
+
+            <if test="condition.searchMap.orderCode!=null and condition.searchMap.orderCode!='' ">
+                and t.order_code LIKE CONCAT( CONCAT('%', #{condition.searchMap.orderCode}),'%')
+
+
+
+        </if>
+
+
+
+            <if test="condition.searchMap.orderPrice!=null and condition.searchMap.orderPrice!='' ">
+                and t.order_price = #{condition.searchMap.orderPrice}
+
+
+
+        </if>
+
+
+
+            <if test="condition.searchMap.orderDate!=null and condition.searchMap.orderDate!='' ">
+                and t.order_date = #{condition.searchMap.orderDate}
+
+
+
+        </if>
+
+
+
+            <if test="condition.searchMap.orderDept!=null and condition.searchMap.orderDept!='' ">
+                and t.order_dept = #{condition.searchMap.orderDept}
+
+
+
+        </if>
+
+
+
+            <if test="condition.searchMap.orderType!=null and condition.searchMap.orderType!='' ">
+                and t.order_type = #{condition.searchMap.orderType}
+
+
+
+        </if>
+
+
+    </if>
+order by ts desc
+    <if test="page != null">
+    <if test="page.sort!=null">
+
+    <foreach collection="page.sort" item="item" separator=" ">
+,${item.property}  ${item.direction}
+    </foreach>
+    </if>
+    </if>
+    </select>
+    </mapper>
